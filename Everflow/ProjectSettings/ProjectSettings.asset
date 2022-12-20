@@ -154,7 +154,8 @@ PlayerSettings:
   resetResolutionOnWindowResize: 0
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
-  applicationIdentifier: {}
+  applicationIdentifier:
+    Standalone: com.DefaultCompany.Everflow
   buildNumber:
     Standalone: 0
     iPhone: 0
@@ -811,10 +812,10 @@ PlayerSettings:
     Build: 0
     Collab: 0
     Game Performance: 0
-    Legacy Analytics: 0
-    Purchasing: 0
+    Legacy Analytics: 1
+    Purchasing: 1
     UDP: 0
-    Unity Ads: 0
+    Unity Ads: 1
   luminIcon:
     m_Name: 
     m_ModelFolderPath: 
@@ -827,12 +828,12 @@ PlayerSettings:
     m_VersionCode: 1
     m_VersionName: 
   apiCompatibilityLevel: 6
-  activeInputHandler: 2
-  cloudProjectId: 
+  activeInputHandler: 1
+  cloudProjectId: 279ce300-8f4e-4a2a-88ee-8d4de969d88c
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: 
-  organizationId: 
+  projectName: Everflow (1)
+  organizationId: oasis-hurler
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   playerDataPath: 

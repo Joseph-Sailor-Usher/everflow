@@ -118,7 +118,6 @@
 -define:ENABLE_TILEMAP
 -define:ENABLE_TIMELINE
 -define:ENABLE_INPUT_SYSTEM
--define:ENABLE_LEGACY_INPUT_MANAGER
 -define:CSHARP_7_OR_LATER
 -define:CSHARP_7_3_OR_NEWER
 -r:"/Applications/Unity/Hub/Editor/2021.3.12f1/PlaybackEngines/AndroidPlayer/Unity.Android.Gradle.dll"
@@ -376,6 +375,9 @@
 "Assets/Mini First Person Controller/Scripts/Components/Zoom.cs"
 "Assets/Mini First Person Controller/Scripts/FirstPersonLook.cs"
 "Assets/Mini First Person Controller/Scripts/FirstPersonMovement.cs"
+"Assets/Mobile Input/GyroscopeController.cs"
+"Assets/Mobile Input/JoystickController.cs"
+"Assets/Mobile Input/PlayerController.cs"
 "Assets/polyperfect/Low Poly Animated People/- Materials/Simple Water/SimpleWater.cs"
 -langversion:9.0
 

@@ -5,16 +5,16 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638070233570000000
-    m_Hash: 862818642
+      ticks: 638070685380000000
+    m_Hash: 1326900040
   m_LockFileStatus:
     m_FilePath: /Users/sailor/Documents/GitHub/everflow/Everflow/Packages/packages-lock.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638070233570000000
-    m_Hash: 435319334
+      ticks: 638070685380000000
+    m_Hash: 2563486430
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_LocalPackages:
@@ -851,6 +851,163 @@ m_ResolvedPackages:
     path: 
   unityLifecycle:
     version: 5.0.3
+    nextVersion: 
+- packageId: com.unity.purchasing@4.5.2
+  testable: 0
+  isDirectDependency: 1
+  version: 4.5.2
+  source: 1
+  resolvedPath: /Users/sailor/Documents/GitHub/everflow/Everflow/Library/PackageCache/com.unity.purchasing@4.5.2
+  assetPath: Packages/com.unity.purchasing
+  name: com.unity.purchasing
+  displayName: In App Purchasing
+  author:
+    name: 
+    email: 
+    url: 
+  category: 
+  type: asset
+  description: "IMPORTANT UPGRADE NOTES:\n\nIf updating from Unity IAP (com.unity.purchasing
+    + the Asset Store plugin) versions 2.x to version 3.x, complete the following
+    actions in order to resolve compilation errors:\n 1. Move IAPProductCatalog.json
+    and BillingMode.json\n\tFROM: Assets/Plugins/UnityPurchasing/Resources/\n\tTO:
+    Assets/Resources/.\n 2. Move AppleTangle.cs and GooglePlayTangle.cs\n\tFROM:
+    Assets/Plugins/UnityPurchasing/generated\n\tTO: Assets/Scripts/UnityPurchasing/generated.\n
+    3. Remove all remaining Asset Store plugin folders and files in Assets/Plugins/UnityPurchasing
+    from your project.\n\nPACKAGE DESCRIPTION:\n\nWith Unity IAP, setting up in-app
+    purchases for your game across multiple app stores has never been easier.\n\nThis
+    package provides:\n\n \u25AA One common API to access all stores for free so
+    you can fully understand and optimize your in-game economy\n \u25AA Automatic
+    coupling with Unity Analytics to enable monitoring and decision-making based
+    on trends in your revenue and purchase data across multiple platforms\n \u25AA
+    Support for iOS, Mac, tvOS, Google Play, Windows, and Amazon app stores(*).\n
+    \u25AA Support to work with the Unity Distribution Portal to synchronize catalogs
+    and transactions with other app stores\n \u25AA Client-side receipt validation
+    for Apple App Store and Google Play\n\nAfter installing this package, open the
+    Services Window to enable In-App Purchasing to use these features."
+  status: 4
+  errors: []
+  versions:
+    all:
+    - 0.0.3
+    - 0.0.4
+    - 0.0.5
+    - 0.0.6
+    - 0.0.7
+    - 0.0.8
+    - 0.0.9
+    - 0.0.10
+    - 0.0.11
+    - 0.0.12
+    - 0.0.13
+    - 0.0.14
+    - 0.0.15
+    - 0.0.16
+    - 0.0.17
+    - 0.0.18
+    - 0.0.19
+    - 2.0.0
+    - 2.0.1
+    - 2.0.3
+    - 2.0.5
+    - 2.0.6
+    - 2.1.0
+    - 2.1.1
+    - 2.2.0
+    - 2.2.1
+    - 2.2.2
+    - 3.0.0-pre.3
+    - 3.0.0-pre.4
+    - 3.0.0-pre.5
+    - 3.0.0-pre.6
+    - 3.0.1
+    - 3.0.2
+    - 3.1.0
+    - 3.2.1
+    - 3.2.2
+    - 3.2.3
+    - 4.0.0
+    - 4.0.3
+    - 4.1.0
+    - 4.1.1
+    - 4.1.2
+    - 4.1.3
+    - 4.1.4
+    - 4.1.5
+    - 4.2.0-pre.1
+    - 4.2.0-pre.2
+    - 4.2.1
+    - 4.3.0
+    - 4.4.0
+    - 4.4.1
+    - 4.5.0
+    - 4.5.1
+    - 4.5.2
+    compatible:
+    - 4.4.1
+    - 4.5.0
+    - 4.5.1
+    - 4.5.2
+    verified: 4.4.1
+  dependencies:
+  - name: com.unity.ugui
+    version: 1.0.0
+  - name: com.unity.modules.unityanalytics
+    version: 1.0.0
+  - name: com.unity.modules.unitywebrequest
+    version: 1.0.0
+  - name: com.unity.modules.jsonserialize
+    version: 1.0.0
+  - name: com.unity.modules.androidjni
+    version: 1.0.0
+  - name: com.unity.services.core
+    version: 1.3.1
+  - name: com.unity.services.analytics
+    version: 4.0.1
+  resolvedDependencies:
+  - name: com.unity.ugui
+    version: 1.0.0
+  - name: com.unity.modules.ui
+    version: 1.0.0
+  - name: com.unity.modules.imgui
+    version: 1.0.0
+  - name: com.unity.modules.unityanalytics
+    version: 1.0.0
+  - name: com.unity.modules.unitywebrequest
+    version: 1.0.0
+  - name: com.unity.modules.jsonserialize
+    version: 1.0.0
+  - name: com.unity.modules.androidjni
+    version: 1.0.0
+  - name: com.unity.services.core
+    version: 1.4.3
+  - name: com.unity.nuget.newtonsoft-json
+    version: 3.0.2
+  - name: com.unity.services.analytics
+    version: 4.2.0
+  keywords:
+  - purchasing
+  - iap
+  - unity
+  registry:
+    id: main
+    name: 
+    url: https://packages.unity.com
+    scopes: []
+    isDefault: 1
+    capabilities: 7
+  hideInEditor: 0
+  isAssetStorePackage: 0
+  datePublishedTicks: 638062797740000000
+  documentationUrl: https://docs.unity3d.com/Packages/com.unity.purchasing@4.5/manual/index.html
+  hasRepository: 1
+  repository:
+    type: git
+    url: https://github.cds.internal.unity3d.com/unity/com.unity.purchasing.git
+    revision: 2e002e868803fadde53e54c4029e776932314588
+    path: 
+  unityLifecycle:
+    version: 4.4.1
     nextVersion: 
 - packageId: com.unity.test-framework@1.1.33
   testable: 0
@@ -3225,6 +3382,175 @@ m_ResolvedPackages:
   unityLifecycle:
     version: 1.0.6
     nextVersion: 
+- packageId: com.unity.services.core@1.4.3
+  testable: 0
+  isDirectDependency: 0
+  version: 1.4.3
+  source: 1
+  resolvedPath: /Users/sailor/Documents/GitHub/everflow/Everflow/Library/PackageCache/com.unity.services.core@1.4.3
+  assetPath: Packages/com.unity.services.core
+  name: com.unity.services.core
+  displayName: Services Core
+  author:
+    name: 
+    email: 
+    url: 
+  category: 
+  type: asset
+  description: 'This package defines common components used by multiple Game Service
+    packages.
+
+    These are standardized and aim to unify the overall experience
+    of working with Game Services SDK.'
+  status: 4
+  errors: []
+  versions:
+    all:
+    - 1.0.1
+    - 1.1.0-pre.7
+    - 1.1.0-pre.8
+    - 1.1.0-pre.9
+    - 1.1.0-pre.10
+    - 1.1.0-pre.11
+    - 1.1.0-pre.41
+    - 1.1.0-pre.69
+    - 1.2.0
+    - 1.3.1
+    - 1.3.2
+    - 1.4.0
+    - 1.4.1
+    - 1.4.2
+    - 1.4.3
+    - 1.5.2
+    - 1.6.0
+    - 1.7.0
+    compatible:
+    - 1.4.3
+    - 1.5.2
+    - 1.6.0
+    - 1.7.0
+    verified: 1.4.3
+  dependencies:
+  - name: com.unity.modules.unitywebrequest
+    version: 1.0.0
+  - name: com.unity.nuget.newtonsoft-json
+    version: 3.0.2
+  - name: com.unity.modules.androidjni
+    version: 1.0.0
+  resolvedDependencies:
+  - name: com.unity.modules.unitywebrequest
+    version: 1.0.0
+  - name: com.unity.nuget.newtonsoft-json
+    version: 3.0.2
+  - name: com.unity.modules.androidjni
+    version: 1.0.0
+  keywords: []
+  registry:
+    id: main
+    name: 
+    url: https://packages.unity.com
+    scopes: []
+    isDefault: 1
+    capabilities: 7
+  hideInEditor: 0
+  isAssetStorePackage: 0
+  datePublishedTicks: 637959096350000000
+  documentationUrl: 
+  hasRepository: 1
+  repository:
+    type: git
+    url: https://github.cds.internal.unity3d.com/unity/operate-services-sdk.git
+    revision: 145c9bbe93bde4784d4641e172be4ca40a3745fc
+    path: 
+  unityLifecycle:
+    version: 1.4.3
+    nextVersion: 
+- packageId: com.unity.services.analytics@4.2.0
+  testable: 0
+  isDirectDependency: 0
+  version: 4.2.0
+  source: 1
+  resolvedPath: /Users/sailor/Documents/GitHub/everflow/Everflow/Library/PackageCache/com.unity.services.analytics@4.2.0
+  assetPath: Packages/com.unity.services.analytics
+  name: com.unity.services.analytics
+  displayName: Analytics
+  author:
+    name: 
+    email: 
+    url: 
+  category: 
+  type: asset
+  description: The Unity Analytics package automatically collects core events and
+    user properties when someone uses your game or application, and enables you to
+    track specific in-game actions your user performs by defining custom events.
+    The data collected from this package is surfaced in the Unity dashboard where
+    you can use it to gather user insights, segment your player base and make informed
+    decisions around the optimization of your game.
+  status: 4
+  errors: []
+  versions:
+    all:
+    - 1.0.3
+    - 1.0.4
+    - 1.0.5
+    - 2.0.7-pre.4
+    - 2.0.7-pre.6
+    - 2.0.7-pre.7
+    - 3.0.0-pre.2
+    - 3.0.0-pre.3
+    - 3.0.0-pre.4
+    - 4.0.0-pre.2
+    - 4.0.0-pre.3
+    - 4.0.0
+    - 4.0.1
+    - 4.1.0
+    - 4.2.0
+    - 4.3.0
+    compatible:
+    - 4.2.0
+    - 4.3.0
+    verified: 4.2.0
+  dependencies:
+  - name: com.unity.ugui
+    version: 1.0.0
+  - name: com.unity.services.core
+    version: 1.4.0
+  resolvedDependencies:
+  - name: com.unity.ugui
+    version: 1.0.0
+  - name: com.unity.modules.ui
+    version: 1.0.0
+  - name: com.unity.modules.imgui
+    version: 1.0.0
+  - name: com.unity.services.core
+    version: 1.4.3
+  - name: com.unity.modules.unitywebrequest
+    version: 1.0.0
+  - name: com.unity.nuget.newtonsoft-json
+    version: 3.0.2
+  - name: com.unity.modules.androidjni
+    version: 1.0.0
+  keywords: []
+  registry:
+    id: main
+    name: 
+    url: https://packages.unity.com
+    scopes: []
+    isDefault: 1
+    capabilities: 7
+  hideInEditor: 0
+  isAssetStorePackage: 0
+  datePublishedTicks: 637970128630000000
+  documentationUrl: 
+  hasRepository: 1
+  repository:
+    type: git
+    url: https://github.cds.internal.unity3d.com/unity/operate-services-sdk.git
+    revision: 40445d94118e139ce5bff46afdeb574502a2e3c9
+    path: 
+  unityLifecycle:
+    version: 4.2.0
+    nextVersion: 
 - packageId: com.unity.settings-manager@1.0.3
   testable: 0
   isDirectDependency: 0
@@ -3339,89 +3665,6 @@ m_ResolvedPackages:
     path: 
   unityLifecycle:
     version: 1.0.0
-    nextVersion: 
-- packageId: com.unity.services.core@1.4.3
-  testable: 0
-  isDirectDependency: 0
-  version: 1.4.3
-  source: 1
-  resolvedPath: /Users/sailor/Documents/GitHub/everflow/Everflow/Library/PackageCache/com.unity.services.core@1.4.3
-  assetPath: Packages/com.unity.services.core
-  name: com.unity.services.core
-  displayName: Services Core
-  author:
-    name: 
-    email: 
-    url: 
-  category: 
-  type: asset
-  description: 'This package defines common components used by multiple Game Service
-    packages.
-
-    These are standardized and aim to unify the overall experience
-    of working with Game Services SDK.'
-  status: 4
-  errors: []
-  versions:
-    all:
-    - 1.0.1
-    - 1.1.0-pre.7
-    - 1.1.0-pre.8
-    - 1.1.0-pre.9
-    - 1.1.0-pre.10
-    - 1.1.0-pre.11
-    - 1.1.0-pre.41
-    - 1.1.0-pre.69
-    - 1.2.0
-    - 1.3.1
-    - 1.3.2
-    - 1.4.0
-    - 1.4.1
-    - 1.4.2
-    - 1.4.3
-    - 1.5.2
-    - 1.6.0
-    - 1.7.0
-    compatible:
-    - 1.4.3
-    - 1.5.2
-    - 1.6.0
-    - 1.7.0
-    verified: 1.4.3
-  dependencies:
-  - name: com.unity.modules.unitywebrequest
-    version: 1.0.0
-  - name: com.unity.nuget.newtonsoft-json
-    version: 3.0.2
-  - name: com.unity.modules.androidjni
-    version: 1.0.0
-  resolvedDependencies:
-  - name: com.unity.modules.unitywebrequest
-    version: 1.0.0
-  - name: com.unity.nuget.newtonsoft-json
-    version: 3.0.2
-  - name: com.unity.modules.androidjni
-    version: 1.0.0
-  keywords: []
-  registry:
-    id: main
-    name: 
-    url: https://packages.unity.com
-    scopes: []
-    isDefault: 1
-    capabilities: 7
-  hideInEditor: 0
-  isAssetStorePackage: 0
-  datePublishedTicks: 637959096350000000
-  documentationUrl: 
-  hasRepository: 1
-  repository:
-    type: git
-    url: https://github.cds.internal.unity3d.com/unity/operate-services-sdk.git
-    revision: 145c9bbe93bde4784d4641e172be4ca40a3745fc
-    path: 
-  unityLifecycle:
-    version: 1.4.3
     nextVersion: 
 - packageId: com.unity.nuget.newtonsoft-json@3.0.2
   testable: 0
