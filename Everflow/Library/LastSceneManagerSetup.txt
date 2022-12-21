@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/SampleScene.unity
+- path: Assets/Mini First Person Controller/Demo/Demo Mini FPC Minimal.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
