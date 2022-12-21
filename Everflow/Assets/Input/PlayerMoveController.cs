@@ -18,12 +18,13 @@ public class PlayerMoveController : MonoBehaviour
 
     //Private state variables
     private Vector3 processedMovementInput, flatVelocity;
-    private float dif;
+    public float distanceToGround, groundNormalSlope;
     private Vector3 flatDragGroundVelocity;
-
+    private Vector3 groundNormal;
     //Customizable variables
     public float groundSpeed = 7.0f, airSpeed = 7.0f, relSpeed;
-    public float jumpForce, lastJumpTime, jumpCooldownTime, groundCheckDistance = 1.4f;
+    public float maximumGroundSlope = 60.0f;
+    public float jumpForce, lastJumpTime, jumpCooldownTime, maxDistanceFromGroundToJump = 1.5f;
     public float slideDrag, stopDrag, groundDrag;
 
     //Input system variables
@@ -32,7 +33,6 @@ public class PlayerMoveController : MonoBehaviour
     {
         playerControls = new();
         if (playerRb == null) playerRb = GetComponent<Rigidbody>();
-        lastJumpTime = Time.time;
         move = playerControls.FindAction("Move");
         jump = playerControls.FindAction("Jump");
         jump.performed += Jump;
@@ -54,7 +54,14 @@ public class PlayerMoveController : MonoBehaviour
     private void FixedUpdate()
     {
         //If there is something below us, we can jump again
-        isGrounded = Physics.Raycast(transform.position + Vector3.up, Vector3.down, out rayDownHit, groundCheckDistance, playerLayerMask);
+        isGrounded = Physics.Raycast(transform.position + Vector3.up, Vector3.down, out rayDownHit, 1000.0f, playerLayerMask);
+        groundNormal = rayDownHit.normal;
+        distanceToGround = rayDownHit.distance;
+        groundNormalSlope = Vector3.Angle(groundNormal, Vector3.up);
+        if(distanceToGround > maxDistanceFromGroundToJump || groundNormalSlope > maximumGroundSlope)
+        {
+            isGrounded = false;
+        }
         ApplyDrag();
     }
     private void Update()
@@ -78,7 +85,6 @@ public class PlayerMoveController : MonoBehaviour
         flatVelocity.y = 0;
         flatVelocity.z = playerRb.velocity.z;
         processedMovementInput = processedMovementInput.normalized;
-        dif += Mathf.Abs(Vector2.Angle(flatVelocity.normalized, processedMovementInput)) / 2.0f;
         if (isGrounded)
         {
             relSpeed = Mathf.Max(groundSpeed - flatVelocity.magnitude, 0);
@@ -90,32 +96,54 @@ public class PlayerMoveController : MonoBehaviour
             playerRb.AddForce(relSpeed * processedMovementInput * Time.deltaTime * 100, ForceMode.Acceleration);
         }
     }
+    //Do nothing within the jumpCooldown period and grounded
+    //Apply force in the direction of the ground normal
     public void Jump(InputAction.CallbackContext context)
     {
         //Debug.Log("Jump");
-        //RETURN if ungrounded or cooling down
-        if (isGrounded == false || Time.time - lastJumpTime > jumpCooldownTime) return;
+        //if cooling down
+        if (distanceToGround > maxDistanceFromGroundToJump || (Time.time - lastJumpTime) < jumpCooldownTime) return;
+        //else jump
         lastJumpTime = Time.time;
+
+        //If angle from up to groundNormal is too steep
+        if (groundNormalSlope > maximumGroundSlope)
+        {
+            //apply groundNormal force
+            playerRb.AddForce(groundNormal * jumpForce, ForceMode.Impulse);
+            return;
+        }
+        //Apply upward force
         playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        if(Vector3.Dot(transform.forward, groundNormal) >= 0)
+        {
+            playerRb.AddForce(Vector3.up * jumpForce / 2, ForceMode.Impulse);
+        }
     }
     public void ApplyDrag()
     {
         flatDragGroundVelocity = playerRb.velocity;
-        if (isSliding)
+        if (isGrounded)
         {
-            flatDragGroundVelocity.x *= slideDrag;
-            flatDragGroundVelocity.z *= slideDrag;
+            if (isSliding)
+            {
+                Debug.Log("Slide drag");
+                flatDragGroundVelocity.x *= slideDrag;
+                flatDragGroundVelocity.z *= slideDrag;
+            }
+            else if ((intendedMoveVector.magnitude < 0.01f))
+            {
+                Debug.Log("stop drag");
+                flatDragGroundVelocity.x *= stopDrag;
+                flatDragGroundVelocity.z *= stopDrag;
+            }
+            else
+            {
+                Debug.Log("walk drag");
+                flatDragGroundVelocity.x *= groundDrag;
+                flatDragGroundVelocity.z *= groundDrag;
+            }
+            playerRb.velocity = flatDragGroundVelocity;
         }
-        else if (isGrounded && (intendedMoveVector.magnitude < 0.01f))
-        {
-            flatDragGroundVelocity.x *= stopDrag;
-            flatDragGroundVelocity.z *= stopDrag;
-        }
-        else if (isGrounded)
-        {
-            flatDragGroundVelocity.x *= groundDrag;
-            flatDragGroundVelocity.z *= groundDrag;
-        }
-        playerRb.velocity = flatDragGroundVelocity;
     }
 }
