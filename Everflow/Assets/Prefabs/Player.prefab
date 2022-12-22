@@ -166,16 +166,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerRb: {fileID: 1395959978728278355}
+  neck: {fileID: 0}
   isGrounded: 0
   isSliding: 0
   intendedMoveVector: {x: 0, y: 0}
+  intendedLookVector: {x: 0, y: 0}
+  lookSensitivity: 50
+  distanceToGround: 0
+  groundNormalSlope: 0
   groundSpeed: 20
   airSpeed: 6.5
   relSpeed: 0
+  maximumGroundSlope: 60
   jumpForce: 6.5
   lastJumpTime: 0
   jumpCooldownTime: 50
-  groundCheckDistance: 1.4
+  maxDistanceFromGroundToJump: 1.5
   slideDrag: 0.96
   stopDrag: 0.7
   groundDrag: 0.94

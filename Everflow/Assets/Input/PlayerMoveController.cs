@@ -1,21 +1,20 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 using UnityEngine.InputSystem;
-using UnityEngine.Events;
-using Unity.VisualScripting;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem.EnhancedTouch;
 
 public class PlayerMoveController : MonoBehaviour
 {
     //References
     public Rigidbody playerRb;
     private PlayerInput playerControls;
+    public Transform neck;
 
     //State variables
     public bool isGrounded, isSliding;
-    public Vector2 intendedMoveVector;
-
+    public Vector2 intendedMoveVector, intendedLookVector;
+    public float lookSensitivity = 100.0f;
     //Private state variables
     private Vector3 processedMovementInput, flatVelocity;
     public float distanceToGround, groundNormalSlope;
@@ -27,10 +26,17 @@ public class PlayerMoveController : MonoBehaviour
     public float jumpForce, lastJumpTime, jumpCooldownTime, maxDistanceFromGroundToJump = 1.5f;
     public float slideDrag, stopDrag, groundDrag;
 
+    // Create a touchscreen device.
+    private UnityEngine.InputSystem.EnhancedTouch.Finger lookFinger;
+    private int touchesCount = 0;
+    private bool looking = false;
+    private PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
     //Input system variables
     private InputAction move, jump;
     void Awake()
     {
+        touchesCount = 0;
+        EnhancedTouchSupport.Enable();
         playerControls = new();
         if (playerRb == null) playerRb = GetComponent<Rigidbody>();
         move = playerControls.FindAction("Move");
@@ -68,13 +74,33 @@ public class PlayerMoveController : MonoBehaviour
     {
         //Read the input into our vector2
         intendedMoveVector = playerControls.Player.Move.ReadValue<Vector2>();
-        if(isSliding == false)
+        intendedMoveVector.x *= intendedMoveVector.x * intendedMoveVector.x;
+        intendedMoveVector.y *= intendedMoveVector.y * intendedMoveVector.y;
+        if (isSliding == false)
             Move();
+
+        //Check if we're beginning to look around if we aren't looking and there's a new touch
+        if(looking == false && UnityEngine.InputSystem.EnhancedTouch.Touch.activeTouches.Count > touchesCount)
+        {
+            UpdateLookTouch();
+            touchesCount = UnityEngine.InputSystem.EnhancedTouch.Touch.activeTouches.Count;
+        }
+        //End the look touch if it ends
+        if(lookFinger != null && lookFinger.isActive == false)
+        {
+            looking = false;
+            transformRotCache = transform.rotation;
+            neckCache = neck.rotation;
+            touchesCount = UnityEngine.InputSystem.EnhancedTouch.Touch.activeTouches.Count;
+        }
+        if (looking)
+        {
+            Look();
+        }
     }
     public void MoveEventListener(InputAction.CallbackContext context)
     {
         Move();
-        //Debug.Log("Moving");
     }
     public void Move()
     {
@@ -96,11 +122,45 @@ public class PlayerMoveController : MonoBehaviour
             playerRb.AddForce(relSpeed * processedMovementInput * Time.deltaTime * 100, ForceMode.Acceleration);
         }
     }
+    private Quaternion neckCache, transformRotCache;
+    private List<RaycastResult> raycastResults = new List<RaycastResult>();
+    public void UpdateLookTouch()
+    {
+        //If we aren't already looking
+        if (looking == false)
+        {
+            //Check if this is a look touch
+            foreach (var touch in UnityEngine.InputSystem.EnhancedTouch.Touch.activeTouches)
+            {
+                //If this is a new  touch
+                if (touch.phase == UnityEngine.InputSystem.TouchPhase.Began)
+                {
+                    //Check if it hit any UI elements
+                    eventDataCurrentPosition.position = touch.screenPosition;
+                    EventSystem.current.RaycastAll(eventDataCurrentPosition, raycastResults);
+                    if (raycastResults.Count == 0)
+                    {
+                        lookFinger = touch.finger;
+                        looking = true;
+                    }
+                }
+            }
+            raycastResults.Clear();
+        }
+    }
+    public void Look()
+    {
+        Debug.Log(lookFinger.currentTouch.screenPosition.x + " " + lookFinger.currentTouch.screenPosition.y + " from "
+            + lookFinger.currentTouch.startScreenPosition.x + " " + lookFinger.currentTouch.startScreenPosition.y);
+        intendedLookVector = lookFinger.currentTouch.screenPosition - lookFinger.currentTouch.startScreenPosition;
+        intendedLookVector.y = Mathf.Clamp(intendedLookVector.y, -80.0f, 80.0f);
+        transform.rotation = Quaternion.Euler(0, transformRotCache.eulerAngles.y + intendedLookVector.x, 0);
+        neck.localRotation = Quaternion.Euler(neckCache.eulerAngles.x - intendedLookVector.y, 0, 0);
+    }
     //Do nothing within the jumpCooldown period and grounded
     //Apply force in the direction of the ground normal
     public void Jump(InputAction.CallbackContext context)
     {
-        //Debug.Log("Jump");
         //if cooling down
         if (distanceToGround > maxDistanceFromGroundToJump || (Time.time - lastJumpTime) < jumpCooldownTime) return;
         //else jump
@@ -127,19 +187,16 @@ public class PlayerMoveController : MonoBehaviour
         {
             if (isSliding)
             {
-                Debug.Log("Slide drag");
                 flatDragGroundVelocity.x *= slideDrag;
                 flatDragGroundVelocity.z *= slideDrag;
             }
             else if ((intendedMoveVector.magnitude < 0.01f))
             {
-                Debug.Log("stop drag");
                 flatDragGroundVelocity.x *= stopDrag;
                 flatDragGroundVelocity.z *= stopDrag;
             }
             else
             {
-                Debug.Log("walk drag");
                 flatDragGroundVelocity.x *= groundDrag;
                 flatDragGroundVelocity.z *= groundDrag;
             }
